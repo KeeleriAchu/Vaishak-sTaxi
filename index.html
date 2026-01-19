@@ -88,14 +88,6 @@ header a{
     background:#0097a7;
 }
 
-.info{
-    background:#f1f5f9;
-    padding:10px;
-    border-radius:8px;
-    margin-top:8px;
-    font-size:14px;
-}
-
 /* CONTACT BOX */
 .contact-box{
     margin-top:20px;
@@ -176,15 +168,10 @@ footer{
 
 <h3>“Comfortable rides for every mile of India”</h3>
 
-<input id="name" placeholder="Customer Name" required>
+<input id="custName" placeholder="Customer Name" required>
 <input id="phone" placeholder="WhatsApp Number" required>
 <input id="pickup" placeholder="Pickup Location" required>
 <input id="drop" placeholder="Drop Location" required>
-<input id="distance" type="number" placeholder="Distance (KM)" required>
-
-<div class="info">
-    <p>Fare: ₹26 per KM (Long distance only)</p>
-</div>
 
 <button onclick="bookCab()">Book Cab via WhatsApp</button>
 
@@ -221,21 +208,22 @@ document.getElementById("waLink").href =
 /* BOOKING FUNCTION */
 function bookCab(){
 
-    if(!name.value || !phone.value || !pickup.value || !drop.value || !distance.value){
+    const custName = document.getElementById("custName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const pickup = document.getElementById("pickup").value.trim();
+    const drop = document.getElementById("drop").value.trim();
+
+    if(!custName || !phone || !pickup || !drop){
         alert("Please fill all details");
         return;
     }
 
-    const fare = distance.value * 26;
-
     const message =
 `🚖 Cab Booking Request
-Name: ${name.value}
-Phone: ${phone.value}
-Pickup: ${pickup.value}
-Drop: ${drop.value}
-Distance: ${distance.value} km
-Fare: ₹${fare}`;
+Name: ${custName}
+Phone: ${phone}
+Pickup: ${pickup}
+Drop: ${drop}`;
 
     window.open(
         `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`,
